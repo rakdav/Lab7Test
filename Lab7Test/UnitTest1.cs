@@ -6,29 +6,29 @@ namespace Lab7Test
     [TestFixture]
     public class Tests
     {
-       [TestCase]
-       public void mainTitle()
-       {
-            IWebDriver webDriver = new ChromeDriver();
-            webDriver.Url = "https://kbkdist.ru/";
-            Assert.That(webDriver.Title,Is.EqualTo("Образовательная платформа Калининградского бизнес-колледжа"));
-            webDriver.Close();
-            webDriver.Quit();
-        }
+       //[TestCase]
+       //public void mainTitle()
+       //{
+       //     IWebDriver webDriver = new ChromeDriver();
+       //     webDriver.Url = "https://kbkdist.ru/";
+       //     Assert.That(webDriver.Title,Is.EqualTo("Образовательная платформа Калининградского бизнес-колледжа"));
+       //     webDriver.Close();
+       //     webDriver.Quit();
+       // }
         [TestCase]
         public void google_request()
         {
-            IWebDriver webDriver = new ChromeDriver();
-            webDriver.Url = "https://www.dns-shop.ru/";
-            IWebElement search = webDriver.FindElement(By.XPath("//*[@id=\"header - mobile - inner\"]/div[2]/div[1]/div/div/div[1]/div/input"));
+            ChromeOptions options = new ChromeOptions();
+            options.AddArguments("--disable-infobars");
+            IWebDriver webDriver = new ChromeDriver(options);
+            webDriver.Url = "https://www.rambler.ru/";
+            IWebElement search = webDriver.FindElement(By.XPath("/html/body/div[1]/header/div[3]/div/div[2]/form/input"));
             search.SendKeys("Планшет");
-            IWebDriver 
+            IWebElement button = webDriver.FindElement(By.XPath("/html/body/div[1]/header/div[3]/div/div[2]/form/button[2]"));
+            button.Click();
             webDriver.Close();
-            //webDriver.Quit();
+            webDriver.Quit();
         }
-        [TearDown]
-        public void testEnd()
-        {
-        }
+        
     }
 }
